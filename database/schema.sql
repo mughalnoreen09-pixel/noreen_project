@@ -1,0 +1,23 @@
+CREATE DATABASE IF NOT EXISTS salondiva
+  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE salondiva;
+
+CREATE TABLE IF NOT EXISTS users (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(254) NOT NULL UNIQUE,
+  username VARCHAR(80) NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  role ENUM('admin','receptionist','stylist') NOT NULL DEFAULT 'stylist',
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  account_status ENUM('pending','approved','rejected') NOT NULL DEFAULT 'pending',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS login_attempts (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  login_key CHAR(64) NOT NULL,
+  attempted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_login_attempts_key_time (login_key, attempted_at)
+) ENGINE=InnoDB;

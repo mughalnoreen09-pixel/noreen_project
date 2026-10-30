@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="theme-color" content="#fff6ec">
+        <meta name="description" content="SalonDiva salon services, appointments, and beauty care in Karachi.">
+        <title>SalonDiva | Your salon, your style</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <symbol id="i-scissors" viewBox="0 0 48 48">
+                <circle cx="15" cy="34" r="5"/>
+                <circle cx="33" cy="34" r="5"/>
+                <path d="M19 31 37 9M29 31 11 9"/>
+            </symbol>
+            <symbol id="i-polish" viewBox="0 0 48 48">
+                <path d="M24 6c6 8 10 12 10 19a10 10 0 0 1-20 0c0-7 4-11 10-19Z"/>
+                <path d="M19 28a5 5 0 0 0 5 5"/>
+            </symbol>
+            <symbol id="i-foot" viewBox="0 0 48 48">
+                <path d="M10 38c10 4 22 4 28 0M14 34c0-10 4-18 10-18s10 8 10 18M24 10v6M18 12l3 4M30 12l-3 4"/>
+            </symbol>
+            <symbol id="i-face" viewBox="0 0 48 48">
+                <ellipse cx="24" cy="25" rx="12" ry="16"/>
+                <path d="M18 22h.01M30 22h.01M19 31c3 3 7 3 10 0"/>
+            </symbol>
+            <symbol id="i-comb" viewBox="0 0 48 48">
+                <rect x="6" y="14" width="36" height="10" rx="3"/>
+                <path d="M12 24v12M19 24v12M26 24v12M33 24v12M40 24v12"/>
+            </symbol>
+            <symbol id="i-mirror" viewBox="0 0 48 48">
+                <circle cx="24" cy="19" r="13"/>
+                <path d="M24 32v12M18 44h12"/>
+            </symbol>
+            <symbol id="i-sparkle" viewBox="0 0 48 48">
+                <path d="m24 4 5.5 14.5L44 24l-14.5 5.5L24 44l-5.5-14.5L4 24l14.5-5.5Z"/>
+                <path d="m38 4 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z"/>
+            </symbol>
+            <symbol id="i-arrow" viewBox="0 0 24 24">
+                <path d="M5 12h14M13 5l7 7-7 7"/>
+            </symbol>
+            <symbol id="i-check" viewBox="0 0 24 24">
+                <path d="m5 12 5 5L20 6"/>
+            </symbol>
+        </svg>
+        <div class="page-shell" id="home">
+            <header class="site-header">
+                <a class="brand" href="#home" aria-label="SalonDiva home">
+                    <span class="brand-mark">
+                        <svg>
+                            <use href="#i-sparkle"/>
+                        </svg>
+                    </span>
+                    <span>
+                        Salon<span>Diva</span>
+                        <small>BEAUTY • CARE • CONFIDENCE</small>
+                    </span>
+                </a>
+                <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="nav-links" id="mainNav" aria-label="Main navigation">
+                    <a class="nav-link active" href="#home">Home</a>
+                    <a class="nav-link" href="#about">Our salon</a>
+                    <a class="nav-link" href="#services">Services</a>
+                    <a class="nav-link" href="#team">Our team</a>
+                    <a class="nav-link" href="#feedback">Feedback</a>
+                    <a class="nav-link" href="#contact">Contact</a>
+                </nav>
+               <div class="header-actions">
+                    <a class="btn btn-quiet" href="public/login.php">Staff Login</a>
+                    <a class="btn btn-primary" href="public/register.php">Create Account →</a>
+                </div>
+            </header>
+            <main>
+                <section class="hero">
+                    <div class="hero-copy">
+                        <span class="eyebrow">
+                            <span class="eyebrow-dot"></span>
+                            YOUR MOMENT. YOUR GLOW.
+                        </span>
+                        <h1>
+                            A little care.<br>
+                            <em>A lot of confidence.</em>
+                        </h1>
+                        <p class="hero-description">From fresh cuts to feel-good facials, make time for the look you love. Discover your service, choose your stylist, and book a time that works for you.</p>
+                        <div class="hero-actions">
+                            <a class="btn btn-primary btn-large" href="public/booking.php">
+                                Book an appointment 
+                                <svg>
+                                    <use href="#i-arrow"/>
+                                </svg>
+                            </a>
+                            <a class="btn btn-soft btn-large" href="#services">Explore services</a>
+                        </div>
+                        <div class="hero-note">
+                            <span class="note-icon">
+                                <svg>
+                                    <use href="#i-check"/>
+                                </svg>
+                            </span>
+                            <span>
+                                <strong>Your beauty time, made simple</strong>
+                                <small>Services, schedules and booking in one place.</small>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="hero-art" aria-label="Decorative salon beauty illustration">
+                        <div class="art-glow"></div>
+                        <div class="art-tag tag-top">
+                            <span>✦</span>
+                            YOUR SELF-CARE SPACE
+                        </div>
+                        <div class="mirror-frame">
+                            <div class="mirror-inner">
+                                <div class="mirror-person">
+                                    <div class="hair"></div>
+                                    <div class="face"></div>
+                                    <div class="neck"></div>
+                                    <div class="body-shape"></div>
+                                </div>
+                                <span class="mirror-shine">✦</span>
+                            </div>
+                        </div>
+                        <div class="salon-stool">
+                            <div class="stool-seat"></div>
+                            <div class="stool-stem"></div>
+                            <div class="stool-foot"></div>
+                        </div>
+                        <div class="plant">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <i></i>
+                        </div>
+                        <div class="art-tag tag-bottom">
+                            <span class="tag-star">✦</span>
+                            <span>
+                                <strong>Feel good. Look amazing.</strong>
+                                <small>Every visit is your time.</small>
+                            </span>
+                        </div>
+                        <div class="floating-dot dot-one"></div>
+                        <div class="floating-dot dot-two"></div>
+                    </div>
+                </section>
+                <div class="trust-strip">
+                    <div>
+                        <strong>01</strong>
+                        <span>Thoughtful beauty care</span>
+                    </div>
+                    <div>
+                        <strong>02</strong>
+                        <span>Services for your style</span>
+                    </div>
+                    <div>
+                        <strong>03</strong>
+                        <span>Easy online booking</span>
+                    </div>
+                    <div>
+                        <strong>04</strong>
+                        <span>Time just for you</span>
+                    </div>
+                </div>
+                <section class="section about-section" id="about">
+                    <div class="about-art">
+                        <div class="about-disc">
+                            <svg>
+                                <use href="#i-mirror"/>
+                            </svg>
+                        </div>
+                        <div class="about-card">
+                            <span>THE SALONDIVA FEELING</span>
+                            <strong>
+                                Relax.<br>
+                                Refresh.<br>Be you.
+                            </strong>
+                            <div class="little-stars">✦ ✧ ✦</div>
+                        </div>
+                        <div class="about-ring"></div>
+                    </div>
+                    <div class="about-copy">
+                        <span class="eyebrow">A WARM WELCOME</span>
+                        <h2>
+                            Your salon time<br>
+                            should feel <em>special.</em>
+                        </h2>
+                        <p class="lead">SalonDiva brings beauty services and salon care together in one welcoming space.</p>
+                        <p>Choose from hair styling, nail care, pedicures and facials. Our booking experience helps you find a service, select an available time, and keep your appointment details close at hand.</p>
+                        <ul class="check-list">
+                            <li>
+                                <svg>
+                                    <use href="#i-check"/>
+                                </svg>
+                                Browse services in one place
+                            </li>
+                            <li>
+                                <svg>
+                                    <use href="#i-check"/>
+                                </svg>
+                                Choose from available appointment times
+                            </li>
+                            <li>
+                                <svg>
+                                    <use href="#i-check"/>
+                                </svg>
+                                Review bookings and payment details
+                            </li>
+                        </ul>
+                        <a class="text-link" href="public/booking.php">
+                            Plan your next visit 
+                            <svg>
+                                <use href="#i-arrow"/>
+                            </svg>
+                        </a>
+                    </div>
+                </section>
+                <section class="section services-section" id="services">
+                    <div class="section-heading">
+                        <div>
+                            <span class="eyebrow">YOUR NEXT FAVOURITE</span>
+                            <h2>
+                                Find your <em>feel-good</em>
+                                service
+                            </h2>
+                        </div>
+                        <a class="text-link desktop-link" href="public/booking.php">
+                            Book a service 
+                            <svg>
+                                <use href="#i-arrow"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="service-grid">
+                        <article class="service-card">
+                            <div class="service-icon icon-pink">
+                                <svg>
+                                    <use href="#i-scissors"/>
+                                </svg>
+                                <span>01</span>
+                            </div>
+                            <div class="service-content">
+                                <h3>Hair styling</h3>
+                                <p>Fresh cuts, colour and styling made for your look.</p>
+                                <a href="public/booking.php">
+                                    Explore &amp;book 
+                                    <svg>
+                                        <use href="#i-arrow"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </article>
+                        <article class="service-card">
+                            <div class="service-icon icon-yellow">
+                                <svg>
+                                    <use href="#i-polish"/>
+                                </svg>
+                                <span>02</span>
+                            </div>
+                            <div class="service-content">
+                                <h3>Manicure</h3>
+                                <p>Shape, care and polish for beautifully looked-after hands.</p>
+                                <a href="public/booking.php">
+                                    Explore &amp;book 
+                                    <svg>
+                                        <use href="#i-arrow"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </article>
+                        <article class="service-card">
+                            <div class="service-icon icon-cream">
+                                <svg>
+                                    <use href="#i-foot"/>
+                                </svg>
+                                <span>03</span>
+                            </div>
+                            <div class="service-content">
+                                <h3>Pedicure</h3>
+                                <p>A relaxing reset with soothing foot care and polish.</p>
+                                <a href="public/booking.php">
+                                    Explore &amp;book 
+                                    <svg>
+                                        <use href="#i-arrow"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </article>
+                        <article class="service-card">
+                            <div class="service-icon icon-rose">
+                                <svg>
+                                    <use href="#i-face"/>
+                                </svg>
+                                <span>04</span>
+                            </div>
+                            <div class="service-content">
+                                <h3>Glow facials</h3>
+                                <p>A fresh-feeling facial for a little extra self-care.</p>
+                                <a href="public/booking.php">
+                                    Explore &amp;book 
+                                    <svg>
+                                        <use href="#i-arrow"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="services-bottom">
+                        <span>Ready to pick your service?</span>
+                        <a class="btn btn-primary" href="public/booking.php">
+                            Start booking 
+                            <svg>
+                                <use href="#i-arrow"/>
+                            </svg>
+                        </a>
+                    </div>
+                </section>
+                <section class="booking-banner">
+                    <div class="banner-sparkle">✦</div>
+                    <div>
+                        <span class="eyebrow">YOUR NEXT VISIT STARTS HERE</span>
+                        <h2>
+                            Make a little room<br>
+                            for <em>yourself.</em>
+                        </h2>
+                        <p>Choose a service and find an available appointment time.</p>
+                    </div>
+                    <a class="btn btn-yellow btn-large" href="public/booking.php">
+                        Book your visit 
+                        <svg>
+                            <use href="#i-arrow"/>
+                        </svg>
+                    </a>
+                </section>
+                <section class="section process-section">
+                    <div class="section-heading">
+                        <div>
+                            <span class="eyebrow">SIMPLE FROM THE START</span>
+                            <h2>
+                                Three steps to <em>your chair</em>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="process-grid">
+                        <article>
+                            <span class="process-number">01</span>
+                            <div class="process-icon">
+                                <svg>
+                                    <use href="#i-scissors"/>
+                                </svg>
+                            </div>
+                            <h3>Choose your service</h3>
+                            <p>Explore the salon services and decide what feels right for you.</p>
+                        </article>
+                        <article>
+                            <span class="process-number">02</span>
+                            <div class="process-icon">
+                                <svg>
+                                    <use href="#i-mirror"/>
+                                </svg>
+                            </div>
+                            <h3>Pick your time</h3>
+                            <p>Select a stylist and choose from available slots in the booking page.</p>
+                        </article>
+                        <article>
+                            <span class="process-number">03</span>
+                            <div class="process-icon">
+                                <svg>
+                                    <use href="#i-sparkle"/>
+                                </svg>
+                            </div>
+                            <h3>Enjoy your visit</h3>
+                            <p>Keep your booking details handy and enjoy a moment for yourself.</p>
+                        </article>
+                    </div>
+                </section>
+                <section class="section team-section" id="team">
+                    <div class="section-heading">
+                        <div>
+                            <span class="eyebrow">PEOPLE WHO CARE</span>
+                            <h2>
+                                A team to help you <em>shine</em>
+                            </h2>
+                            <p class="section-sub">Meet your beauty team when you book your service.</p>
+                        </div>
+                        <a class="text-link desktop-link" href="public/booking.php">
+                            Find a stylist 
+                            <svg>
+                                <use href="#i-arrow"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="team-note">
+                        <div class="team-note-icon">
+                            <svg>
+                                <use href="#i-sparkle"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Your style, your choice</h3>
+                            <p>Available stylists depend on the service and schedule you select. Open the booking page to see current options.</p>
+                        </div>
+                        <a href="public/booking.php" aria-label="Choose a stylist">↗</a>
+                    </div>
+                </section>
+                <section class="section feedback-section" id="feedback">
+                    <div class="feedback-intro">
+                        <span class="eyebrow">WE’RE LISTENING</span>
+                        <h2>
+                            Your feedback<br>
+                            helps us <em>grow.</em>
+                        </h2>
+                        <p>Tell us how your experience felt or share an idea for making SalonDiva better.</p>
+                        <div class="feedback-decoration">
+                            “<span>Your voice matters.</span>
+                            ”
+                        </div>
+                    </div>
+                    <form class="feedback-form" id="feedbackForm" novalidate>
+                        <div class="form-heading">
+                            <div>
+                                <h3>Leave a note</h3>
+                                <p>All fields marked * are required.</p>
+                            </div>
+                            <span class="form-flower">✳</span>
+                        </div>
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="feedbackName">Your name *</label>
+                                <input id="feedbackName" name="name" autocomplete="name" required maxlength="100" placeholder="Enter your name">
+                            </div>
+                            <div class="field">
+                                <label for="feedbackEmail">Email address *</label>
+                                <input id="feedbackEmail" name="email" type="email" autocomplete="email" required maxlength="200" placeholder="you@example.com">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="feedbackTopic">What is your feedback about?</label>
+                            <select id="feedbackTopic" name="topic">
+                                <option value="Visit experience">Visit experience</option>
+                                <option value="Booking experience">Booking experience</option>
+                                <option value="Salon services">Salon services</option>
+                                <option value="Website suggestion">Website suggestion</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="feedbackMessage">Your message *</label>
+                            <textarea id="feedbackMessage" name="message" rows="4" required maxlength="2000" placeholder="Tell us what you think..."></textarea>
+                            <div class="character-count">
+                                <span id="charCount">0</span>
+                                /2000
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-submit" type="submit">
+                            Save feedback on this device 
+                            <svg>
+                                <use href="#i-arrow"/>
+                            </svg>
+                        </button>
+                        <p class="form-note">This HTML/CSS/JavaScript version saves feedback in this browser only. It does not send messages to the salon server.</p>
+                        <div class="form-status" id="feedbackStatus" role="status" aria-live="polite"></div>
+                        <div class="feedback-tools">
+                            <button type="button" class="small-link" id="downloadFeedback">Download saved feedback</button>
+                            <button type="button" class="small-link danger-link" id="clearFeedback">Clear saved feedback</button>
+                        </div>
+                    </form>
+                </section>
+                <section class="faq-section section" id="faq">
+                    <div class="faq-title">
+                        <span class="eyebrow">GOOD TO KNOW</span>
+                        <h2>
+                            Questions, <em>answered.</em>
+                        </h2>
+                    </div>
+                    <div class="faq-list">
+                        <details>
+                            <summary>
+                                How do I book an appointment?<span>+</span>
+                            </summary>
+                            <p>Open Book Appointment, choose a service, select an available stylist and date, then check the time slots.</p>
+                        </details>
+                        <details>
+                            <summary>
+                                Can I change or cancel a booking?<span>+</span>
+                            </summary>
+                            <p>Use the booking-management link provided with your appointment, or contact the salon for assistance.</p>
+                        </details>
+                        <details>
+                            <summary>
+                                Where can staff sign in?<span>+</span>
+                            </summary>
+                            <p>Use the Staff login link at the top of this page to open the existing SalonDiva sign-in screen.</p>
+                        </details>
+                        <details>
+                            <summary>
+                                Can I create an account?<span>+</span>
+                            </summary>
+                            <p>Yes. Select Create account to open the existing SalonDiva registration page. Account permissions are managed by the application.</p>
+                        </details>
+                    </div>
+                </section>
+            </main>
+            <footer class="site-footer" id="contact">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <a class="brand brand-footer" href="#home">
+                            <span class="brand-mark">
+                                <svg>
+                                    <use href="#i-sparkle"/>
+                                </svg>
+                            </span>
+                            <span>
+                                Salon<span>Diva</span>
+                                <small>BEAUTY • CARE • CONFIDENCE</small>
+                            </span>
+                        </a>
+                        <p>
+                            A little care. A lot of confidence.<br>Your beauty time, made simple.
+                        </p>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Explore</h3>
+                        <a href="#about">Our salon</a>
+                        <a href="#services">Services</a>
+                        <a href="#team">Our team</a>
+                        <a href="#feedback">Feedback</a>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Your SalonDiva</h3>
+                        <a href="public/booking.php">Book appointment</a>
+                        <a href="public/login.php">Staff login</a>
+                        <a href="public/register.php">Create account</a>
+                        <a href="public/dashboard.php">Go to dashboard</a>
+                    </div>
+                    <div class="footer-col footer-contact">
+                        <h3>Visit / Contact</h3>
+                        <p>Karachi, Sindh, Pakistan</p>
+                        <p>For appointments, use our online booking page.</p>
+                        <a href="public/booking.php" class="footer-book">
+                            Book a visit 
+                            <svg>
+                                <use href="#i-arrow"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <span>
+                        © <span id="currentYear"></span>
+                        SalonDiva. Made for your feel-good moments.
+                    </span>
+                    <a href="#home">Back to top ↑</a>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

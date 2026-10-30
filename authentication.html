@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SalonDiva | User Authentication & Access Control</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --pink-1: #FFC2D1;
+                --pink-2: #FF93B0;
+                --cream: #FFF6EC;
+                --yellow: #FFD45C;
+                --crimson: #C8264F;
+                --ink: #2B1520;
+                --muted: #6E4A57;
+                --line: #F0D5C4;
+                --white: #fff
+            }
+
+            * {
+                box-sizing: border-box
+            }
+
+            html {
+                scroll-behavior: smooth
+            }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+                color: var(--ink);
+                font: 400 1rem/1.5 "Outfit",system-ui,sans-serif;
+                background: linear-gradient(135deg,var(--pink-1),var(--pink-2)) fixed
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none
+            }
+
+            button,input {
+                font: inherit
+            }
+
+            button {
+                cursor: pointer
+            }
+
+            :focus-visible {
+                outline: 3px solid var(--ink);
+                outline-offset: 3px
+            }
+
+            .container {
+                max-width: 1180px;
+                margin: auto;
+                padding: 1.35rem 1.2rem 3rem
+            }
+
+            .nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+                flex-wrap: wrap;
+                background: var(--cream);
+                border-radius: 32px;
+                padding: .7rem 1rem .7rem 1.6rem
+            }
+
+            .logo {
+                font-size: 1.6rem;
+                font-weight: 700;
+                color: var(--crimson)
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 1.4rem;
+                flex-wrap: wrap;
+                font-weight: 500
+            }
+
+            .nav-links a:hover {
+                color: var(--crimson)
+            }
+
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 46px;
+                padding: .65rem 1.35rem;
+                border: 0;
+                border-radius: 999px;
+                font-weight: 600
+            }
+
+            .btn-outline {
+                border: 1.5px solid var(--ink);
+                background: transparent
+            }
+
+            .btn-crimson {
+                background: var(--crimson);
+                color: white
+            }
+
+            .btn-dark {
+                width: 100%;
+                background: var(--ink);
+                color: white;
+                min-height: 52px
+            }
+
+            .hero {
+                display: grid;
+                grid-template-columns: minmax(0,1fr) minmax(340px,440px);
+                gap: 2.2rem;
+                align-items: center;
+                padding: 3.5rem 0 2.5rem
+            }
+
+            .eyebrow {
+                display: inline-flex;
+                align-items: center;
+                gap: .5rem;
+                background: var(--cream);
+                border-radius: 999px;
+                padding: .45rem .85rem;
+                font-size: .9rem;
+                font-weight: 600;
+                color: var(--crimson)
+            }
+
+            h1,h2,h3,p {
+                margin-top: 0
+            }
+
+            h1 {
+                font-size: clamp(2.6rem,6vw,4.5rem);
+                line-height: 1.02;
+                letter-spacing: -.03em;
+                margin: .9rem 0 1.1rem
+            }
+
+            h1 span {
+                color: var(--crimson)
+            }
+
+            .lead {
+                font-size: 1.15rem;
+                max-width: 600px;
+                color: #4A1F30
+            }
+
+            .hero-actions {
+                display: flex;
+                gap: .75rem;
+                flex-wrap: wrap;
+                margin: 1.5rem 0
+            }
+
+            .pill {
+                display: inline-flex;
+                align-items: center;
+                gap: .55rem;
+                background: var(--cream);
+                border-radius: 18px;
+                padding: .8rem 1rem;
+                margin-top: .4rem
+            }
+
+            .dot {
+                width: 11px;
+                height: 11px;
+                background: #299764;
+                border-radius: 50%
+            }
+
+            .auth-card,.panel,.role-card,.permission-card {
+                background: var(--cream);
+                border-radius: 30px
+            }
+
+            .auth-card {
+                padding: 1.65rem;
+                box-shadow: 0 18px 45px #7e24431c
+            }
+
+            .card-head {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 1rem;
+                margin-bottom: 1.1rem
+            }
+
+            .card-head h2 {
+                font-size: 1.7rem;
+                margin-bottom: .3rem
+            }
+
+            .subtle {
+                color: var(--muted);
+                font-size: .92rem;
+                margin: 0
+            }
+
+            .lock {
+                width: 48px;
+                height: 48px;
+                border-radius: 17px;
+                background: var(--yellow);
+                display: grid;
+                place-items: center;
+                font-size: 1.35rem;
+                flex-shrink: 0
+            }
+
+            .role-label,.field label {
+                display: block;
+                font-weight: 600;
+                font-size: .9rem;
+                margin-bottom: .45rem
+            }
+
+            .role-select {
+                display: grid;
+                grid-template-columns: repeat(3,1fr);
+                gap: .4rem;
+                background: #fff;
+                padding: .35rem;
+                border-radius: 18px;
+                margin-bottom: 1.15rem
+            }
+
+            .role-option {
+                border: 0;
+                background: transparent;
+                border-radius: 14px;
+                padding: .65rem .2rem;
+                font-size: .9rem;
+                font-weight: 600;
+                color: var(--muted)
+            }
+
+            .role-option[aria-pressed="true"] {
+                background: var(--crimson);
+                color: white
+            }
+
+            .field {
+                margin-bottom: .9rem
+            }
+
+            .input-wrap {
+                position: relative
+            }
+
+            .field input {
+                width: 100%;
+                height: 49px;
+                border: 1.5px solid var(--line);
+                background: white;
+                border-radius: 15px;
+                padding: 0 1rem;
+                color: var(--ink)
+            }
+
+            .field input:focus {
+                border-color: var(--crimson);
+                outline: 2px solid #c8264f22
+            }
+
+            .toggle-pass {
+                position: absolute;
+                right: .6rem;
+                top: 50%;
+                transform: translateY(-50%);
+                border: 0;
+                background: transparent;
+                color: var(--crimson);
+                font-size: .85rem;
+                font-weight: 600;
+                padding: .4rem
+            }
+
+            .form-row {
+                display: flex;
+                justify-content: space-between;
+                gap: .6rem;
+                align-items: center;
+                font-size: .9rem;
+                margin: .25rem 0 1.1rem
+            }
+
+            .remember {
+                display: flex;
+                align-items: center;
+                gap: .45rem;
+                color: var(--muted)
+            }
+
+            .remember input {
+                accent-color: var(--crimson)
+            }
+
+            .text-link {
+                color: var(--crimson);
+                font-weight: 600
+            }
+
+            .status {
+                min-height: 1.4rem;
+                text-align: center;
+                color: var(--crimson);
+                font-size: .9rem;
+                margin: .7rem 0 0
+            }
+
+            .secure-note {
+                text-align: center;
+                color: var(--muted);
+                font-size: .82rem;
+                margin: 1rem 0 0
+            }
+
+            .section {
+                padding: 2.2rem 0 0
+            }
+
+            .section-heading {
+                display: flex;
+                align-items: end;
+                justify-content: space-between;
+                gap: 1rem;
+                flex-wrap: wrap;
+                margin-bottom: 1.2rem
+            }
+
+            .section-heading h2 {
+                font-size: clamp(2rem,4vw,2.65rem);
+                margin-bottom: .35rem
+            }
+
+            .section-heading p {
+                margin: 0;
+                color: #4A1F30
+            }
+
+            .roles {
+                display: grid;
+                grid-template-columns: repeat(3,1fr);
+                gap: 1rem
+            }
+
+            .role-card {
+                padding: 1.4rem;
+                transition: transform .18s ease,box-shadow .18s ease;
+                border: 2px solid transparent
+            }
+
+            .role-card.active {
+                border-color: var(--crimson);
+                box-shadow: 0 10px 28px #7e24431a
+            }
+
+            .role-top {
+                display: flex;
+                align-items: center;
+                gap: .8rem;
+                margin-bottom: .9rem
+            }
+
+            .role-icon {
+                width: 52px;
+                height: 52px;
+                border-radius: 17px;
+                background: var(--yellow);
+                display: grid;
+                place-items: center;
+                font-size: 1.4rem
+            }
+
+            .role-card:nth-child(2) .role-icon {
+                background: #FFB0C4
+            }
+
+            .role-card:nth-child(3) .role-icon {
+                background: #F6DCCB
+            }
+
+            .role-card h3 {
+                font-size: 1.35rem;
+                margin: 0
+            }
+
+            .role-card p {
+                color: var(--muted);
+                margin: .3rem 0 .8rem
+            }
+
+            .role-card ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: grid;
+                gap: .5rem
+            }
+
+            .role-card li {
+                display: flex;
+                gap: .55rem;
+                align-items: flex-start
+            }
+
+            .check {
+                color: var(--crimson);
+                font-weight: 700
+            }
+
+            .dashboard {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem
+            }
+
+            .panel {
+                padding: 1.5rem
+            }
+
+            .panel h3 {
+                font-size: 1.35rem;
+                margin-bottom: .35rem
+            }
+
+            .panel .subtle {
+                margin-bottom: 1rem
+            }
+
+            .permission-list {
+                display: grid;
+                gap: .65rem
+            }
+
+            .permission {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+                background: white;
+                border-radius: 15px;
+                padding: .8rem .9rem
+            }
+
+            .permission span:first-child {
+                font-weight: 500
+            }
+
+            .access {
+                font-size: .78rem;
+                font-weight: 700;
+                border-radius: 999px;
+                padding: .25rem .65rem;
+                white-space: nowrap
+            }
+
+            .allowed {
+                background: #e2f4e9;
+                color: #1b7144
+            }
+
+            .limited {
+                background: #fff0c2;
+                color: #765500
+            }
+
+            .blocked {
+                background: #f8dce3;
+                color: #a41e42
+            }
+
+            .audit {
+                display: grid;
+                gap: .85rem
+            }
+
+            .audit-item {
+                display: flex;
+                gap: .75rem;
+                align-items: flex-start
+            }
+
+            .audit-icon {
+                width: 38px;
+                height: 38px;
+                border-radius: 13px;
+                background: var(--yellow);
+                display: grid;
+                place-items: center;
+                flex-shrink: 0
+            }
+
+            .audit-item strong {
+                display: block
+            }
+
+            .audit-item p {
+                margin: .15rem 0 0;
+                color: var(--muted);
+                font-size: .9rem
+            }
+
+            .notice {
+                margin-top: 1rem;
+                border-radius: 18px;
+                background: #fff0c2;
+                padding: 1rem 1.1rem;
+                color: #624a11;
+                font-size: .9rem
+            }
+
+            .footer {
+                margin-top: 2.5rem;
+                background: var(--ink);
+                color: var(--cream);
+                border-radius: 30px;
+                padding: 1.4rem 1.7rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+                flex-wrap: wrap
+            }
+
+            .footer .logo {
+                color: var(--pink-2)
+            }
+
+            .footer p {
+                margin: .2rem 0;
+                opacity: .85
+            }
+
+            @media(max-width: 850px) {
+                .hero {
+                    grid-template-columns:1fr
+                }
+
+                .auth-card {
+                    max-width: 520px
+                }
+
+                .roles {
+                    grid-template-columns: 1fr
+                }
+
+                .dashboard {
+                    grid-template-columns: 1fr
+                }
+
+                .hero {
+                    padding-top: 2.4rem
+                }
+            }
+
+            @media(max-width: 560px) {
+                .container {
+                    padding:1rem .8rem 2rem
+                }
+
+                .nav {
+                    border-radius: 24px;
+                    padding: 1rem;
+                    justify-content: center
+                }
+
+                .nav-links {
+                    order: 3;
+                    width: 100%;
+                    justify-content: center;
+                    gap: 1rem
+                }
+
+                .nav-actions {
+                    margin-left: auto
+                }
+
+                .auth-card {
+                    padding: 1.2rem
+                }
+
+                .role-option {
+                    font-size: .8rem
+                }
+
+                .form-row {
+                    align-items: flex-start;
+                    flex-direction: column
+                }
+            }
+
+            @media(prefers-reduced-motion:reduce) {
+                * {
+                    transition: none!important;
+                    scroll-behavior: auto!important
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header class="nav">
+                <a class="logo" href="#home">SalonDiva</a>
+                <nav class="nav-links" aria-label="Main navigation">
+                    <a href="#home">Overview</a>
+                    <a href="#roles">User roles</a>
+                    <a href="#permissions">Permissions</a>
+                </nav>
+                <div class="nav-actions">
+                    <a class="btn btn-outline" href="#login">Staff login</a>
+                </div>
+            </header>
+            <main id="home">
+                <section class="hero">
+                    <div>
+                        <span class="eyebrow">✦ Salon management · Secure access</span>
+                        <h1>
+                            Every role.<br>
+                            <span>The right access.</span>
+                        </h1>
+                        <p class="lead">A secure, simple way for the SalonDiva team to sign in. Each team member gets the tools they need—nothing more, nothing less.</p>
+                        <div class="hero-actions">
+                            <a class="btn btn-crimson" href="#login">Sign in to workspace</a>
+                            <a class="btn" style="background:var(--cream)" href="#roles">Explore user roles</a>
+                        </div>
+                        <div class="pill">
+                            <span class="dot"></span>
+                            <span>
+                                <strong>Role-based access</strong>
+                                <br>
+                                <small class="subtle">Designed for admins, receptionists and stylists</small>
+                            </span>
+                        </div>
+                    </div>
+                    <section class="auth-card" id="login" aria-labelledby="login-title">
+                        <div class="card-head">
+                            <div>
+                                <h2 id="login-title">Welcome back</h2>
+                                <p class="subtle">Sign in to your SalonDiva account.</p>
+                            </div>
+                            <div class="lock" aria-hidden="true">🔐</div>
+                        </div>
+                        <form id="loginForm" novalidate>
+                            <span class="role-label">Choose your role</span>
+                            <div class="role-select" role="group" aria-label="User role">
+                                <button class="role-option" type="button" data-role="admin" aria-pressed="true">Admin</button>
+                                <button class="role-option" type="button" data-role="receptionist" aria-pressed="false">Receptionist</button>
+                                <button class="role-option" type="button" data-role="stylist" aria-pressed="false">Stylist</button>
+                            </div>
+                            <div class="field">
+                                <label for="username">Username or email</label>
+                                <input id="username" name="username" type="text" autocomplete="username" placeholder="you@salondiva.com" required>
+                            </div>
+                            <div class="field">
+                                <label for="password">Password</label>
+                                <div class="input-wrap">
+                                    <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" minlength="8" required>
+                                    <button class="toggle-pass" id="togglePass" type="button" aria-label="Show password">Show</button>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <label class="remember">
+                                    <input type="checkbox" id="remember">Remember me
+                                </label>
+                                <a class="text-link" href="#security" id="forgotLink">Forgot password?</a>
+                            </div>
+                            <button class="btn btn-dark" type="submit">Sign in securely &nbsp; →</button>
+                            <p class="status" id="status" role="status" aria-live="polite"></p>
+                            <p class="secure-note">🔒 Your account is protected by secure sign-in.</p>
+                        </form>
+                    </section>
+                </section>
+                <section class="section" id="roles">
+                    <div class="section-heading">
+                        <div>
+                            <h2>Made for your team</h2>
+                            <p>Clear responsibilities keep the salon running smoothly.</p>
+                        </div>
+                    </div>
+                    <div class="roles">
+                        <article class="role-card active" data-card-role="admin">
+                            <div class="role-top">
+                                <div class="role-icon">⚙</div>
+                                <div>
+                                    <h3>Admin</h3>
+                                    <span class="subtle">Full management</span>
+                                </div>
+                            </div>
+                            <p>Oversees the salon workspace and staff access.</p>
+                            <ul>
+                                <li>
+                                    <span class="check">✓</span>
+                                    Manage staff accounts and roles
+                                </li>
+                                <li>
+                                    <span class="check">✓</span>
+                                    Manage appointments and services
+                                </li>
+                                <li>
+                                    <span class="check">✓</span>
+                                    Configure salon settings
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="role-card" data-card-role="receptionist">
+                            <div class="role-top">
+                                <div class="role-icon">▦</div>
+                                <div>
+                                    <h3>Receptionist</h3>
+                                    <span class="subtle">Front desk</span>
+                                </div>
+                            </div>
+                            <p>Handles customer details and the daily appointment flow.</p>
+                            <ul>
+                                <li>
+                                    <span class="check">✓</span>
+                                    Manage customer records
+                                </li>
+                                <li>
+                                    <span class="check">✓</span>
+                                    Create and update appointments
+                                </li>
+                                <li>
+                                    <span class="check">✓</span>
+                                    View staff availability
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="role-card" data-card-role="stylist">
+                            <div class="role-top">
+                                <div class="role-icon">✂</div>
+                                <div>
+                                    <h3>Stylist</h3>
+                                    <span class="subtle">Personal schedule</span>
+                                </div>
+                            </div>
+                            <p>Focuses on assigned clients, services and appointments.</p>
+                            <ul>
+                                <li>
+                                    <span class="check">✓</span>
+                                    View assigned appointments
+                                </li>
+                                <li>
+                                    <span class="check">✓</span>
+                                    View relevant customer service details
+                                </li>
+                                <li>
+                                    <span class="check">✓</span>
+                                    Update own appointment status
+                                </li>
+                            </ul>
+                        </article>
+                    </div>
+                </section>
+                <section class="section" id="permissions">
+                    <div class="section-heading">
+                        <div>
+                            <h2>Access at a glance</h2>
+                            <p>Select a role above the sign-in form to preview its permissions.</p>
+                        </div>
+                    </div>
+                    <div class="dashboard">
+                        <section class="panel">
+                            <h3 id="permissionTitle">Admin permissions</h3>
+                            <p class="subtle">Example permission matrix for the selected role.</p>
+                            <div class="permission-list" id="permissionList"></div>
+                        </section>
+                        <section class="panel" id="security">
+                            <h3>Security essentials</h3>
+                            <p class="subtle">Recommended protections for a production system.</p>
+                            <div class="audit">
+                                <div class="audit-item">
+                                    <div class="audit-icon">🔑</div>
+                                    <div>
+                                        <strong>Password protection</strong>
+                                        <p>Validate credentials on the server and store password hashes, never plain-text passwords.</p>
+                                    </div>
+                                </div>
+                                <div class="audit-item">
+                                    <div class="audit-icon">🛡</div>
+                                    <div>
+                                        <strong>Server-enforced permissions</strong>
+                                        <p>Check the signed-in user's role for every protected page and action.</p>
+                                    </div>
+                                </div>
+                                <div class="audit-item">
+                                    <div class="audit-icon">⏱</div>
+                                    <div>
+                                        <strong>Session safety</strong>
+                                        <p>Use secure, HttpOnly session cookies, CSRF protection and sensible session expiry.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="notice">
+                        <strong>Prototype note:</strong>
+                        This page demonstrates the interface and role-permission preview only. The sign-in form does not authenticate users or create a real session until connected to a secure backend.
+                    </div>
+                </section>
+            </main>
+            <footer class="footer">
+                <div>
+                    <div class="logo">SalonDiva</div>
+                    <p>Elegance Salon · Team workspace</p>
+                </div>
+                <p>Secure access for a better salon experience.</p>
+            </footer>
+        </div>
+        <script>
+            (function() {
+                const roles = {
+                    admin: {
+                        title: 'Admin permissions',
+                        permissions: [['Staff accounts & roles', 'Full access'], ['Appointments', 'Full access'], ['Customer records', 'Full access'], ['Services & salon settings', 'Full access'], ['Reports & workspace settings', 'Full access']]
+                    },
+                    receptionist: {
+                        title: 'Receptionist permissions',
+                        permissions: [['Staff accounts & roles', 'No access'], ['Appointments', 'Full access'], ['Customer records', 'Full access'], ['Services & salon settings', 'Limited'], ['Reports & workspace settings', 'No access']]
+                    },
+                    stylist: {
+                        title: 'Stylist permissions',
+                        permissions: [['Staff accounts & roles', 'No access'], ['Appointments', 'Assigned only'], ['Customer records', 'Limited'], ['Services & salon settings', 'No access'], ['Reports & workspace settings', 'No access']]
+                    }
+                };
+                let selectedRole = 'admin';
+                const buttons = [...document.querySelectorAll('[data-role]')];
+                const cards = [...document.querySelectorAll('[data-card-role]')];
+                const list = document.getElementById('permissionList');
+                function renderRole(role) {
+                    selectedRole = role;
+                    buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.role === role)));
+                    cards.forEach(c => c.classList.toggle('active', c.dataset.cardRole === role));
+                    document.getElementById('permissionTitle').textContent = roles[role].title;
+                    list.replaceChildren();
+                    roles[role].permissions.forEach( ([label,access]) => {
+                        const row = document.createElement('div');
+                        row.className = 'permission';
+                        const name = document.createElement('span');
+                        name.textContent = label;
+                        const badge = document.createElement('span');
+                        badge.className = 'access ' + (access === 'Full access' ? 'allowed' : access === 'No access' ? 'blocked' : 'limited');
+                        badge.textContent = access;
+                        row.append(name, badge);
+                        list.append(row);
+                    }
+                    );
+                }
+                buttons.forEach(b => b.addEventListener('click', () => renderRole(b.dataset.role)));
+                document.getElementById('togglePass').addEventListener('click', function() {
+                    const field = document.getElementById('password');
+                    const showing = field.type === 'password';
+                    field.type = showing ? 'text' : 'password';
+                    this.textContent = showing ? 'Hide' : 'Show';
+                    this.setAttribute('aria-label', showing ? 'Hide password' : 'Show password');
+                });
+                document.getElementById('loginForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const username = document.getElementById('username').value.trim();
+                    const password = document.getElementById('password').value;
+                    const status = document.getElementById('status');
+                    if (!username || !password) {
+                        status.textContent = 'Please enter your username/email and password.';
+                        return;
+                    }
+                    if (password.length < 8) {
+                        status.textContent = 'Password must be at least 8 characters.';
+                        return;
+                    }
+                    status.textContent = 'Interface demo only: connect a secure backend to authenticate this ' + selectedRole + ' account.';
+                });
+                document.getElementById('forgotLink').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('status').textContent = 'Password reset should be handled through your backend or account recovery flow.';
+                });
+                renderRole('admin');
+            }
+            )();
+        </script>
+    </body>
+</html>
